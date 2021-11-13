@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="rockpaperscissors.css">
+  </head>
+  <!--JavaScript-->
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+		var socket = io();
+		
+		// setup relevant functions
+		
+		var roomName = 'test'; var playerName = 'test'; var x = 'ping';
+		var playerOne = {'set' : 0, playerName : '', playerRoom : '', hand : ''};
+		var PlayerTwo = {'set' : 0, playerName : '', playerRoom : '', hand : ''};
+		
+		const beats = {'rock' : ['scissors'], 'paper': ['rock', 'well'], 'scissors': ['paper'], 'well': ['rock', 'scissors'] };
+
+		const hand = ['rock', 'paper', 'scissors', 'well'];
+		
+		socket.on('welcome-screen', function(data){
+			document.body.innerHTML = '<div id="welcome-screen">\
+				<input type"text" id="choose-room-name" value="room">\
+				<input type"text" id="choose-player-name" value="player">\
+				<br><button type="button" id="submit-player-data" onclick="submitPlayerData()">Submit</button>\
+			</div>';
+		});
+		function submitPlayerData(){
+			playerOne.playerRoom = roomName = document.getElementById('choose-room-name').value;
+			playerOne.playerName = playerName = document.getElementById('choose-player-name').value;
+			socket.emit('submitPlayerData', {rn : roomName, pn : playerName});
+		};
+		socket.on('setBoard', function(data){
+			playerOne.playerName = data.pn;
+			playerOne.playerRoom = data.rn;
+			document.body.innerHTML = '<main id="main-part">\
+			<h1>Have fun with rock, paper, scissors!</h1>\
+			<br>\
+			<h3 id game-info>Player: '+ data.pn +' is in Room: '+ data.rn +'</h3>\
+			<form id="input-form">\
+				<input type="text" id="playersHand" disabled></input>\
+			</form>\
+			<div id="button-div">\
+			<button id="rock"     onclick="playedRock()">Rock</button>\
+			<button id="paper"	  onclick="playedPaper()">Paper</button>\
+			<button id="scissors" onclick="playedScissors()">Scissors</button>\
+			<button id="well"     onclick="playedWell()">Well</button>\
+			</div>\
+			<p id="output"><span id="first"> </span> <span id="last"> </span></p>\
+			</main>'
+		});
+		/*socket.on('announcePlayer', function(data){
+			if (playerOne.playerName != data) {
+			 playerTwo.playerName = data;
+			 }
+		});
+		socket.on('announcePlayerRoom'), function(data){
+			playerTwo.playerRoom = data;
+		}*/
+		//game relevant functions
+		
+		function playedRock(){
+         socket.emit('playedHand', {pn : playerOne.playerName, hand : 'rock'});
+        };
+		function playedPaper(){
+         socket.emit('playedHand', {pn : playerOne.playerName, hand : 'paper'});
+        };
+		function playedScissors(){
+         socket.emit('playedHand', {pn : playerOne.playerName, hand : 'scissors'});
+        };
+		function playedWell(){
+         socket.emit('playedHand', {pn : playerOne.playerName, hand : 'well'});
+        };
+		
+		socket.on('setHand', function(data){
+			document.getElementById('playersHand').value = '' +data.playerOneHand+ ' vs ' +data.playerTwoHand;
+			
+			if ( beats[data.playerOneHand].includes(data.playerTwoHand) ) {
+			 first.textContent = "Player Two plays " + data.playerTwoHand + ", Player One plays " + data.playerOneHand + ",\u00A0";
+			 last.textContent = "Player One wins!";
+			 last.style.color = "Green";
+		    }
+			else if (data.playerTwoHand == data.playerOneHand)
+			{
+			 first.textContent = "Player Two plays " + data.playerTwoHand + ", Player One plays" + data.playerOneHand + ",\u00A0";
+			 last.textContent = "it's a Draw!";
+			 last.style.color = "Blue";
+		    }
+			else { 
+			 first.textContent = "Player Two plays " + data.playerTwoHand + ", Player One plays " + data.playerOneHand + ",\u00A0";
+			 last.textContent = "Player Two Wins!";
+			 last.style.color = "Red";
+			}
+		console.log(data);
+		});
+		
+		
+  </script>
+  <body>
+  <!--
+    <main id="main-part">
+      <h1>Have fun with rock, paper, scissors!</h1>
+      <br>
+	  <h3 id="room-name">Raumname</h3>
+      <form id="input-form">
+        <p type="text" id="playersHand"></p>
+      </form>
+      <div id="button-div">
+        <button id="rock"     onclick="playedRock()">Rock</button>
+        <button id="paper"	  onclick="playedPaper()">Paper</button>
+        <button id="scissors" onclick="playedScissors()">Scissors</button>
+        <button id="well"     onclick="playedWell()">Well</button>
+      </div>
+      <p id="output"><span id="first"> </span> <span id="last"> </span></p>
+    </main>
+  -->
+  </body>
+</html>

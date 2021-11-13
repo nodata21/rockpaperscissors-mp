@@ -1,0 +1,17 @@
+{
+  "name": "rockpaperscissors",
+  "version": "0.0.1",
+  "description": "rockpaperscissors in with socket.io",
+  "main": "rockpaperscissors.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "none",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-static": "^1.2.6",
+    "socket.io": "^4.3.2"
+  },
+  "devDependencies": {}
+}
