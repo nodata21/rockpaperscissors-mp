@@ -1,0 +1,34 @@
+h1, h3 {
+    text-align: center;
+}
+#input-form {
+    display: flex;
+    justify-content: center;
+}
+#playersHand{
+    text-align: center;
+}
+#button-div {
+    margin: 16px 0px 16px 0px;
+    display: flex;
+    justify-content: center;
+}
+button {
+    background: transparent;
+    color: black;
+    border: 1px solid blue;
+    border-radius: 3px;
+    margin: 5px;
+    padding: 8px;
+    cursor: pointer;
+    transition: all ease 1s;
+}
+button:hover, button:active {
+    outline: none;
+    background: yellow;
+    color: red;
+}
+#output {
+    display: flex;
+    justify-content: center;
+}

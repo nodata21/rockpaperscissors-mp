@@ -4,9 +4,9 @@
     <title>Rock Paper Scissors</title>
     <link rel="stylesheet" href="rockpaperscissors.css">
   </head>
-  <!--JavaScript-->
-  <script src="/socket.io/socket.io.js"></script>
-  <script>
+  	<!--JavaScript-->
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
 		var socket = io();
 		
 		// setup relevant functions
@@ -24,8 +24,9 @@
 				<input type"text" id="choose-room-name" value="room">\
 				<input type"text" id="choose-player-name" value="player">\
 				<br><button type="button" id="submit-player-data" onclick="submitPlayerData()">Submit</button>\
+				<br><p>'+ data +'</p>\
 			</div>';
-			//console.log('hello!');
+
 		});
 		function submitPlayerData(){
 			playerOne.playerRoom = roomName = document.getElementById('choose-room-name').value;
@@ -35,11 +36,11 @@
 		socket.on('setBoard', function(data){
 			playerOne.playerName = data.pn;
 			playerOne.playerRoom = data.rn;
-			playerOne.playerID = data.playerID; 
+			//playerOne.playerID = data.playerID; 
 			document.body.innerHTML = '<main id="main-part">\
 			<h1>Have fun with rock, paper, scissors!</h1>\
 			<br>\
-			<h3 id game-info>Player: '+ data.pn +' is in Room: '+ data.rn +'</h3>\
+			<h3 id game-info>Player '+ data.pn +' plays in Room '+ data.rn +'!</h3>\
 			<form id="input-form">\
 				<input type="text" id="playersHand" disabled></input>\
 			</form>\
@@ -52,16 +53,8 @@
 			<p id="output"><span id="first"> </span> <span id="last"> </span></p>\
 			</main>'
 		});
-		/*socket.on('announcePlayer', function(data){
-			if (playerOne.playerName != data) {
-			 playerTwo.playerName = data;
-			 }
-		});
-		socket.on('announcePlayerRoom'), function(data){
-			playerTwo.playerRoom = data;
-		}*/
+
 		//game relevant functions
-		
 		function playedRock(){
          socket.emit('playedHand', {rn : playerOne.playerRoom, pn : playerOne.playerName, hand : 'rock'});
         };
@@ -76,46 +69,27 @@
         };
 		
 		socket.on('setHand', function(data){
-			document.getElementById('playersHand').value = '' +data.playerOneHand+ ' vs ' +data.playerTwoHand;
+
+			document.getElementById('playersHand').value = data.playerHand + ' vs ' + data.opponentHand;
 			
-			if ( beats[data.playerOneHand].includes(data.playerTwoHand) ) {
-			 first.textContent = "Player Two plays " + data.playerTwoHand + ", Player One plays " + data.playerOneHand + ",\u00A0";
-			 last.textContent = "Player One wins!";
+			if ( beats[data.playerHand].includes(data.opponentHand) ) {
+			 first.textContent = "You " + data.pn + " play " + data.playerHand + ", your opponent " + data.opponent + " plays " + data.opponentHand + ",\u00A0";
+			 last.textContent = " you win!";
 			 last.style.color = "Green";
 		    }
-			else if (data.playerTwoHand == data.playerOneHand)
+			else if (data.playerHand == data.opponentHand)
 			{
-			 first.textContent = "Player Two plays " + data.playerTwoHand + ", Player One plays" + data.playerOneHand + ",\u00A0";
-			 last.textContent = "it's a Draw!";
+			 first.textContent = "You " + data.pn + " play " + data.playerHand + ", your opponent " + data.opponent + " plays " + data.opponentHand + ",\u00A0";
+			 last.textContent = " it's a Draw!";
 			 last.style.color = "Blue";
 		    }
 			else { 
-			 first.textContent = "Player Two plays " + data.playerTwoHand + ", Player One plays " + data.playerOneHand + ",\u00A0";
-			 last.textContent = "Player Two Wins!";
+			 first.textContent = "You " + data.pn + " play " + data.playerHand + ", your opponent " + data.opponent + " plays " + data.opponentHand + ",\u00A0";
+			 last.textContent = " you lose!";
 			 last.style.color = "Red";
 			}
-		//console.log(data);
 		});
-		
-		
-  </script>
-  <body>
-  <!--
-    <main id="main-part">
-      <h1>Have fun with rock, paper, scissors!</h1>
-      <br>
-	  <h3 id="room-name">Raumname</h3>
-      <form id="input-form">
-        <p type="text" id="playersHand"></p>
-      </form>
-      <div id="button-div">
-        <button id="rock"     onclick="playedRock()">Rock</button>
-        <button id="paper"	  onclick="playedPaper()">Paper</button>
-        <button id="scissors" onclick="playedScissors()">Scissors</button>
-        <button id="well"     onclick="playedWell()">Well</button>
-      </div>
-      <p id="output"><span id="first"> </span> <span id="last"> </span></p>
-    </main>
-  -->
-  </body>
+	</script>
+ <body>
+ </body>
 </html>
