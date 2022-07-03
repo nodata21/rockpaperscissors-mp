@@ -1,6 +1,37 @@
 h1, h3 {
     text-align: center;
 }
+#welcome-screen {}
+.center {
+    margin: auto;
+    width: 50%;
+    border: 5px solid rgb(5, 199, 21);
+    padding: 10px;
+}
+table {
+    border-color: black;
+    border: 1px dotted;
+    border-collapse: collapse;
+    text-align: center;
+}
+tr {
+    border-color: black;
+    border: 1px dotted;
+    border-collapse: collapse;
+    text-align: center;
+}
+th {
+    border-color: black;
+    border: 1px dotted;
+    border-collapse: collapse;
+    text-align: center;
+}
+td {
+    border-color: black;
+    border: 1px dotted;
+    border-collapse: collapse;
+    text-align: center;
+}
 #input-form {
     display: flex;
     justify-content: center;
@@ -26,7 +57,7 @@ button {
 button:hover, button:active {
     outline: none;
     background: yellow;
-    color: red;
+    color: blue;
 }
 #output {
     display: flex;

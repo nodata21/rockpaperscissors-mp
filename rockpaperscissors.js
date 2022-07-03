@@ -20,6 +20,8 @@ io.on('connection', function(socket){
 		const arr = Array.from(io.sockets.adapter.rooms);
 		const filtered = arr.filter(room => !room[1].has(room[0]));
 		const res = filtered.map(i => i[0]);
+		console.log(filtered);
+		console.log(res);
 		return res;
 	}
 	roomnames = getActiveRooms(io);

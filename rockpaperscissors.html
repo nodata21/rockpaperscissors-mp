@@ -20,14 +20,49 @@
 		const hand = ['rock', 'paper', 'scissors', 'well'];
 		
 		socket.on('welcome-screen', function(data){
-			document.body.innerHTML = '<div id="welcome-screen">\
-				<input type"text" id="choose-room-name" value="room">\
-				<input type"text" id="choose-player-name" value="player">\
-				<br><button type="button" id="submit-player-data" onclick="submitPlayerData()">Submit</button>\
-				<br><p>'+ data +'</p>\
+			document.body.innerHTML = '<div id="welcome-screen" class="center">\
+				<form>\
+					<input type"text" id="choose-room-name" value="room">\
+					<input type"text" id="choose-player-name" value="player">\
+					<button type="button" id="submit-player-data" onclick="submitPlayerData()">Submit</button>\
+				<form>\
+				<br>\
+				<table id="rooms">\
+					<tr>\
+						<th colspan="2"> Active rooms: </th>\
+					</tr>\
+					<tr>\
+						<td>Room:</td>\
+						<td>Players:</td>\
+					</tr>\
+				</table>\
 			</div>';
+			
+			//listrooms
+			var rooms = data;
+			for (i = 0; i < rooms.length; i++) {
+			var artbltr = document.createElement('tr');
 
+		
+			var artbltd = document.createElement('td');
+		
+			artbltd.setAttribute("class", "newroom");
+		
+			artbltd.textContent += data[i];
+
+		
+			var tblrooms = document.getElementById("rooms");
+		
+		
+			tblrooms.appendChild(artbltr);
+		
+			tblrooms.appendChild(artbltd);
+			}
 		});
+
+		
+
+
 		function submitPlayerData(){
 			playerOne.playerRoom = roomName = document.getElementById('choose-room-name').value;
 			playerOne.playerName = playerName = document.getElementById('choose-player-name').value;
