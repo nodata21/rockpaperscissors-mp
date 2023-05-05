@@ -23,17 +23,16 @@
 			document.body.innerHTML = '<div id="welcome-screen" class="center">\
 				<form>\
 					<input type"text" id="choose-room-name" value="room">\
-					<input type"text" id="choose-player-name" value="player">\
-					<button type="button" id="submit-player-data" onclick="submitPlayerData()">Submit</button>\
+					<input type"text" id="choose-player-name" value="nickname">\
+					<button type="button" id="submit-player-data" onclick="submitPlayerData()">Join Room</button>\
 				<form>\
 				<br>\
 				<table id="rooms">\
 					<tr>\
-						<th colspan="2"> Active rooms: </th>\
+						<th colspan="2"> Open rooms: </th>\
 					</tr>\
 					<tr>\
-						<td>Room:</td>\
-						<td>Players:</td>\
+						<td>Rooms:</td>\
 					</tr>\
 				</table>\
 			</div>';
@@ -71,6 +70,7 @@
 		socket.on('setBoard', function(data){
 			playerOne.playerName = data.pn;
 			playerOne.playerRoom = data.rn;
+			playerOne.playerID = data.playerID;
 			//playerOne.playerID = data.playerID; 
 			document.body.innerHTML = '<main id="main-part">\
 			<h1>Have fun with rock, paper, scissors!</h1>\
@@ -91,16 +91,16 @@
 
 		//game relevant functions
 		function playedRock(){
-         socket.emit('playedHand', {rn : playerOne.playerRoom, pn : playerOne.playerName, hand : 'rock'});
+         socket.emit('playedHand', {rn : playerOne.playerRoom, playerID : playerOne.playerID, pn : playerOne.playerName, hand : 'rock'});
         };
 		function playedPaper(){
-         socket.emit('playedHand', {rn : playerOne.playerRoom, pn : playerOne.playerName, hand : 'paper'});
+         socket.emit('playedHand', {rn : playerOne.playerRoom, playerID : playerOne.playerID, pn : playerOne.playerName, hand : 'paper'});
         };
 		function playedScissors(){
-         socket.emit('playedHand', {rn : playerOne.playerRoom, pn : playerOne.playerName, hand : 'scissors'});
+         socket.emit('playedHand', {rn : playerOne.playerRoom, playerID : playerOne.playerID, pn : playerOne.playerName, hand : 'scissors'});
         };
 		function playedWell(){
-         socket.emit('playedHand', {rn : playerOne.playerRoom, pn : playerOne.playerName, hand : 'well'});
+         socket.emit('playedHand', {rn : playerOne.playerRoom, playerID : playerOne.playerID, pn : playerOne.playerName, hand : 'well'});
         };
 		
 		socket.on('setHand', function(data){

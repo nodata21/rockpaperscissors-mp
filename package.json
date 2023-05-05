@@ -1,6 +1,6 @@
 {
   "name": "rockpaperscissors",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "rockpaperscissors in with socket.io",
   "main": "rockpaperscissors.js",
   "scripts": {
@@ -9,9 +9,10 @@
   "author": "none",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.18.1",
     "express-static": "^1.2.6",
-    "socket.io": "^4.3.2"
+    "nodemon": "^2.0.20",
+    "socket.io": "^4.5.1"
   },
   "devDependencies": {}
 }
