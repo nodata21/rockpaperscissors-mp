@@ -1,5 +1,5 @@
 {
-  "name": "rockpaperscissors",
+  "name": "rockpaperscissors-mp",
   "version": "0.0.3",
   "description": "rockpaperscissors in with socket.io",
   "main": "rockpaperscissors.js",
@@ -14,5 +14,13 @@
     "nodemon": "^2.0.20",
     "socket.io": "^4.5.1"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nodata21/rockpaperscissors-mp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nodata21/rockpaperscissors-mp/issues"
+  },
+  "homepage": "https://github.com/nodata21/rockpaperscissors-mp#readme"
 }
