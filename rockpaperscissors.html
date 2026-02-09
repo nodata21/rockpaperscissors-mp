@@ -75,7 +75,7 @@
 			document.body.innerHTML = '<main id="main-part">\
 			<h1>Have fun with rock, paper, scissors!</h1>\
 			<br>\
-			<h3 id game-info>Player '+ data.pn +' plays in Room '+ data.rn +'!</h3>\
+			<h3 id="game-info">Player <span id="player-name"></span> plays in Room <span id="room-name"></span>!</h3>\
 			<form id="input-form">\
 				<input type="text" id="playersHand" disabled></input>\
 			</form>\
@@ -86,7 +86,15 @@
 			<button id="well"     onclick="playedWell()">Well</button>\
 			</div>\
 			<p id="output"><span id="first"> </span> <span id="last"> </span></p>\
-			</main>'
+			</main>';
+			var playerNameSpan = document.getElementById('player-name');
+			var roomNameSpan = document.getElementById('room-name');
+			if (playerNameSpan) {
+				playerNameSpan.textContent = data.pn;
+			}
+			if (roomNameSpan) {
+				roomNameSpan.textContent = data.rn;
+			}
 		});
 
 		//game relevant functions
