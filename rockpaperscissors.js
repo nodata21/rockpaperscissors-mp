@@ -3,9 +3,17 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 var express = require('express');
+var RateLimit = require('express-rate-limit');
+
+// set up rate limiter: maximum of 100 requests per 15 minutes per IP
+var limiter = RateLimit({
+	windowMs: 15 * 60 * 1000, // 15 minutes
+	max: 100                   // limit each IP to 100 requests per windowMs
+});
+
 app.use(express.static('public'));
 
-app.get('/', function(req, res){ res.sendFile('F:/node.js/rockpaperscissors/rockpaperscissors.html');
+app.get('/', limiter, function(req, res){ res.sendFile('F:/node.js/rockpaperscissors/rockpaperscissors.html');
 });
 
 var roomName = ""; var roomNames = "";
