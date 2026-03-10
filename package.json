@@ -22,7 +22,7 @@
     "express-static": "^1.2.6",
     "nodemon": "^3.1.11",
     "socket.io": "^4.8.3",
-    "express-rate-limit": "^8.2.1"
+    "express-rate-limit": "^8.2.2"
   },
   "devDependencies": {}
 }
